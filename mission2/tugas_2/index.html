@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" onkeypress="lompat()">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compaatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Tugas 2 - Rofa'ul</title>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="score" id="score">Score : 0</div>
+        <img src="assets/remaja.png" alt="" id="remaja" />
+        <img src="assets/dewasa.png" alt="" id="dewasa" />
+        <div class="roadContainer" id="roadContainer">
+            <img src="assets/road.png" alt="" />
+        </div>
+    </div>
+</body>
+<script>
+    const char = document.getElementById("remaja");
+    const dewasa = document.getElementById("dewasa");
+    const playerScore = document.getElementById("score");
+
+    let score = 0;
+    let interval = null;
+
+    let jumlahScore = () => {
+        score++;
+        playerScore.innerHTML = `Score : ${score}`
+    }
+
+    function lompat() {
+        if (char.classList != "animate") {
+            char.classList.add("animate");
+        }
+        setTimeout(function () {
+            char.classList.remove("animate")
+        }, 500)
+        let score = 0
+        interval = setInterval(jumlahScore, 100)
+    }
+
+
+    const ifHitDewasa = setInterval(function () {
+        const charTop = parseInt(window.getComputedStyle(char).getPropertyValue("top"))
+        const dewasaLeft = parseInt(window.getComputedStyle(dewasa).getPropertyValue("left"))
+        if (dewasaLeft < 90 && dewasaLeft > 0 && charTop >= 60) {
+            dewasa.style.animation = "none"
+            dewasa.style.display = "none"
+            if (confirm("Innalillahi,, kamu nabrak aki-aki racing. Mulai lagi??")) {
+                window.location.reload()
+            }
+        }
+    })
+
+</script>
+
+</html>
